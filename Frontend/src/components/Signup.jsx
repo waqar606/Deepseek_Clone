@@ -1,9 +1,9 @@
-
 import { Eye } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { BACKEND_URL } from "../../utils/utils";
+
 function Signup() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -31,17 +31,12 @@ function Signup() {
     setError("");
     try {
       const { data } = await axios.post(
-        // "http://localhost:1000/api/v1/user/signup",
-        `${BACKEND_URL}/user/signup`,
-
+        "/user/signup",
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           password: formData.password,
-        },
-        {
-          withCredentials: true,
         }
       );
       alert(data.message || "Signup Succeeded");
