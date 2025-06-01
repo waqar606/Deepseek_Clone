@@ -18,14 +18,18 @@ config({path:".env"})
 //for photo upload
 
 
-app.use(cors({
-    
-    origin: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials:true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+var cors = require('cors');
+app.use(cors())
 
-}))
+import cors from "cors";
+const corsOrigin ={
+    origin:'https://deepseek-clone-pi-five.vercel.app/', //or whatever port your frontend is using
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials:true,            
+    optionSuccessStatus:200,
+    allowedHeaders: ["Content-Type", "Authorization"],
+}
+app.use(cors(corsOrigin))
 
 mongoose.connect(
     process.env.MONGO_URL,
