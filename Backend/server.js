@@ -16,7 +16,7 @@ config({ path: ".env" });
 
 // Configure CORS
 const corsOptions = {
-    origin: 'https://deepseek-clone-pi-five.vercel.app', // Replace with your frontend's Vercel URL
+    origin: ['https://deepseek-clone-pi-five.vercel.app', 'http://localhost:5173'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     optionsSuccessStatus: 200,
@@ -36,6 +36,11 @@ mongoose.connect(
 // routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/deepseekai", promtRoutes);
+
+// Add a test route to verify server is running
+app.get('/', (req, res) => {
+    res.send('Server is running');
+});
 
 const PORT = process.env.PORT || 1000; // Use process.env.PORT or a default
 app.listen(PORT, () => console.log("Server is running"));
